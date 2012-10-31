@@ -106,6 +106,18 @@ class HTTPClient
       reset_challenge
     end
 
+
+    # Modify authentication priority.
+    def set_auth_priority(authenticators)
+      authenticators.reverse.each do |auth|
+        if @authenticator.include?(auth)
+          @authenticator.slice!(@authenticator.index(auth))
+          @authenticator.unshift(auth)
+        end
+      end
+    end
+
+
     # Filter API implementation.  Traps HTTP request and insert
     # 'Authorization' header if needed.
     def filter_request(req)

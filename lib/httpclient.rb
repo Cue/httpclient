@@ -511,6 +511,11 @@ class HTTPClient
     reset_all
   end
 
+  # Set authentication priority. Guarantees list order provided.
+  def set_auth_priority(authenticators)
+    @www_auth.set_auth_priority(authenticators)
+  end
+
   # Deprecated.  Use set_auth instead.
   def set_basic_auth(domain, user, passwd)
     uri = urify(domain)
